@@ -24,7 +24,7 @@ yarn-error.log*
 
 .idea
 pkg-multicore
-targe
+target
 Cargo.lock
 package-lock.json
 yarn.lock
