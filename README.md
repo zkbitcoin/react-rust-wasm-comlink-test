@@ -5,3 +5,5 @@
 5. yarn install
 6. yarn build
 7. yarn start
+
+issue logged @ https://stackoverflow.com/questions/74538089/double-render-caused-by-react-strictmode-in-react-18-2-0-causes-useeffect-coml
