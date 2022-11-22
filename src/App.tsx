@@ -15,11 +15,20 @@ function App() {
         response: ''
     })
 
+    let promise = new Promise( (resolve, reject) => {
+        resolve("Promise resolved successfully");
+    });
+
     useEffect(() => {
         init().then(() => {
             (async () => {
+                //console.log("calling promise")
+                //await promise.then( result => {console.log("promise resolved")})
+
                 // methods, constructors and setters are async
+                console.log("calling initHandlersTest()")
                 await proxy.initHandlersTest().then((r: { thread: any; }) => {
+                    console.log("initHandlersTest() promised returned")
                     setState({...state, thread: r.thread})
                 })
             })()
