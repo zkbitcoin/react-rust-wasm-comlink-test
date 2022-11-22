@@ -1,0 +1,42 @@
+{
+  "name": "react-rust-wasm-vector-test",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
+    "comlink": "^4.3.1",
+    "wasm-pack": "^0.10.3",
+    "typescript": "^4.9.3",
+    "wasmlib": "file:src/rust/pkg-multicore",
+    "react-use-comlink": "^2.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build:wasm": "RUSTFLAGS=\"-C target-feature=+atomics,+bulk-memory,+mutable-globals\" rustup run nightly-2022-11-21-x86_64-apple-darwin wasm-pack  build ./src/rust --release --target web --out-dir pkg-multicore -- -Z build-std=panic_abort,std -Z namespaced-features",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
