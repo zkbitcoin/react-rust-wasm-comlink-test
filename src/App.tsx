@@ -2,11 +2,13 @@ import {useEffect, useState} from "react";
 import init from "./rust/pkg-multicore";
 import useComlink from 'react-use-comlink'
 import {WasmWorker} from './workers/index'
+import {releaseProxy} from "comlink";
 
 function App() {
 
+    const worker = new Worker(new URL("./workers/index.ts", import.meta.url));
     const {proxy} = useComlink<WasmWorker>(
-        () => new Worker(new URL("./workers/index.ts", import.meta.url)),
+        () => worker,
         [] // used to recreate the worker if it change, defaults to []
     )
 
@@ -34,6 +36,14 @@ function App() {
             })()
         })
     }, [proxy])
+
+    useEffect(() => {
+        return () => {
+            console.log("unmount")
+            proxy[releaseProxy]();
+            worker.terminate();
+        }
+    }, [])
 
     const onClick = async () => {
         if (!state.thread) {
